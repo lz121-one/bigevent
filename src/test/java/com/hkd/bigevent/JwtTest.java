@@ -25,6 +25,7 @@ public class JwtTest {
                 .sign(Algorithm.HMAC256("hkd"));//指定算法，配置密钥
         System.out.println(token);
         System.out.println(token);
+        System.out.println("我是hot-fix");
     }
     //模拟解析token
     @Test
