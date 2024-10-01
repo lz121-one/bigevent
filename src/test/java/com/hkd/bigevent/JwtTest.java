@@ -24,11 +24,7 @@ public class JwtTest {
                 .withExpiresAt(new Date(System.currentTimeMillis()+1000*60*12))//设置过期时间
                 .sign(Algorithm.HMAC256("hkd"));//指定算法，配置密钥
         System.out.println(token);
-        System.out.println(token);
-        System.out.println("我是hot-fix");
-        System.out.println("master");
-        System.out.println("hot-fix2");
-        System.out.println(111);
+
     }
     //模拟解析token
     @Test
