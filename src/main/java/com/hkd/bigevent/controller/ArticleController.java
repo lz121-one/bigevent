@@ -11,15 +11,15 @@ import java.util.Map;
 @RequestMapping("/article")
 public class ArticleController {
     @GetMapping("/list")
-    public Result getList(@RequestHeader(name = "Authorization") String token, HttpServletResponse response){
+    public Result getList(){
         //验证token
 
-        try{
-            Map<String, Object> calims = JwtUtil.parseToken(token);
-            return Result.success("list数据");
-        }catch(Exception e){
-            return Result.error("未登录");
-        }
-
+//        try{
+//            Map<String, Object> calims = JwtUtil.parseToken(token);
+//            return Result.success("list数据");
+//        }catch(Exception e){
+//            return Result.error("未登录");
+//        }
+        return Result.success("list数据");
     }
 }

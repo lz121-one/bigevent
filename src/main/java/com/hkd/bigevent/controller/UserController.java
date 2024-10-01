@@ -8,9 +8,7 @@ import com.hkd.bigevent.util.Md5Util;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,5 +56,15 @@ public class UserController {
         }else{
             return Result.error("账号或密码错误");
         }
+    }
+    //获取用户详细信息
+    @GetMapping("/userInfo")
+    public Result UserInfo(@RequestHeader(name = "Authorization") String token){
+        System.out.println(token);
+        Map<String, Object> claims = JwtUtil.parseToken(token);
+        System.out.println(claims);
+        String username = (String) claims.get("username");
+        User u = userService.findUserByName(username);
+        return Result.success(u);
     }
 }
