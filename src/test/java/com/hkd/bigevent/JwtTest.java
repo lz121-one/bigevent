@@ -26,6 +26,7 @@ public class JwtTest {
         System.out.println(token);
         System.out.println(token);
         System.out.println("我是hot-fix");
+        System.out.println("master");
     }
     //模拟解析token
     @Test
