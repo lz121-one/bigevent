@@ -2,6 +2,7 @@ package com.hkd.bigevent.interceptors;
 
 import com.hkd.bigevent.pojo.Result;
 import com.hkd.bigevent.util.JwtUtil;
+import com.hkd.bigevent.util.ThreadLocalUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         //令牌验证
         try{
             Map<String, Object> calims = JwtUtil.parseToken(token);
+            //将获得的数据存入ThreadLocal中，以便后续调用
+            ThreadLocalUtil.set(calims);
             //验证成功，放行
             return true;
         }catch(Exception e){
@@ -24,5 +27,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.setStatus(401);
             return false;
         }
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        //移除ThreadLocal，防止内存泄露
+        ThreadLocalUtil.remove();
     }
 }

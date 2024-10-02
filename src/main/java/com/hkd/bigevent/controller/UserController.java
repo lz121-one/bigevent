@@ -5,6 +5,7 @@ import com.hkd.bigevent.pojo.User;
 import com.hkd.bigevent.service.UserService;
 import com.hkd.bigevent.util.JwtUtil;
 import com.hkd.bigevent.util.Md5Util;
+import com.hkd.bigevent.util.ThreadLocalUtil;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -59,9 +60,9 @@ public class UserController {
     }
     //获取用户详细信息
     @GetMapping("/userInfo")
-    public Result UserInfo(@RequestHeader(name = "Authorization") String token){
-        System.out.println(token);
-        Map<String, Object> claims = JwtUtil.parseToken(token);
+    public Result UserInfo(){
+        System.out.println("年后");
+        Map<String,Object> claims = ThreadLocalUtil.get();
         System.out.println(claims);
         String username = (String) claims.get("username");
         User u = userService.findUserByName(username);
