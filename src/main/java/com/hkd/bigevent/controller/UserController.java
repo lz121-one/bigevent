@@ -68,4 +68,13 @@ public class UserController {
         User u = userService.findUserByName(username);
         return Result.success(u);
     }
+    @PutMapping("/update")
+    public Result update(@RequestBody User user){
+        Integer update = userService.update(user);
+        if(update == 1){
+            return Result.success();
+        }else{
+            return Result.error("更新失败");
+        }
+    }
 }

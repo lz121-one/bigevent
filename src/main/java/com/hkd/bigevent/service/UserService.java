@@ -7,4 +7,5 @@ public interface UserService {
     public User findUserByName(String username);
     //注册用户
     public Integer register(String username,String password);
+    public Integer update(User user);
 }
